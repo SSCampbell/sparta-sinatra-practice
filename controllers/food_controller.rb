@@ -40,13 +40,13 @@ $food = [
   get '/' do
     @title = "Food Page"
     @food = $food
-    erb :"posts/index"
+    erb :"food/index"
   end
 
   get "/:id" do
     id = params[:id]
    @food = $food[id.to_i]
-    erb :"posts/show"
+    erb :"food/show"
   end
 
   post "/create" do
@@ -54,13 +54,13 @@ $food = [
   end
 
   get "/new" do
-    "This is the new root"
+    erb :"food/food_form"
   end
 
-  get "/:id" do
-    id = params[:id]
-    "This is show route for #{id}"
-  end
+  # get "/:id" do
+  #   id = params[:id]
+  #   "This is show route for #{id}"
+  # end
 
   get "/:id/edit" do
     id = params[:id]
