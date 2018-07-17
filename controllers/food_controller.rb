@@ -37,13 +37,18 @@ $food = [
 ]
 
 #Index
+get '/new' do
+  erb :"food/food_form"
+end
+
   get '/' do
     @title = "Food Page"
     @food = $food
     erb :"food/index"
   end
 
-  get "/:id" do
+  get '/:id' do
+    @title = "Food Category"
     id = params[:id]
    @food = $food[id.to_i]
     erb :"food/show"
@@ -53,9 +58,6 @@ $food = [
     "This is the create root"
   end
 
-  get "/new" do
-    erb :"food/food_form"
-  end
 
   # get "/:id" do
   #   id = params[:id]
