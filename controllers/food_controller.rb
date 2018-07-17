@@ -66,7 +66,9 @@ end
 
   get "/:id/edit" do
     id = params[:id]
-    "This is edit route for #{id}"
+   @food = $food[id.to_i]
+    erb :"food/edit_form"
+
   end
 
   put "/:id" do
