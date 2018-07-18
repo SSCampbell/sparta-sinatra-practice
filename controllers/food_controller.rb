@@ -9,44 +9,49 @@ configure :development do
   register Sinatra::Reloader ##Allows reload to occur while in developement environement
 end
 
-$food = [
-{
-	 id: 0,
-	 title: "MEAT",
-	 body: "There are different type of meat such as, Fish, Chicken, Beef, Lamb and the delicious Turkey!!"
-},
+# $food = [
+# {
+# 	 id: 0,
+# 	 title: "MEAT",
+# 	 body: "There are different type of meat such as, Fish, Chicken, Beef, Lamb and the delicious Turkey!!"
+# },
+#
+# {
+#     id: 1,
+#     title: "DAIRY",
+#     body: "Dairy products range from: Milk, Yogurt and Cheese"
+# },
+#
+# {
+#     id: 2,
+#     title: "VEGETABLES",
+#     body: "With The vibrant colours vegetables can be red like tomatoes, orange like carrots, yellow as a banana,
+#     green as lettace, blue as blueberries and purple like beetroot!"
+# },
+#
+# {
+#     id: 3,
+#     title: "FATS(Sugars)",
+#     body: "This category of food is the most popular! Sweets, chocolates for people with a sweet tooth! "
+# }
+# ]
 
-{
-    id: 1,
-    title: "DAIRY",
-    body: "Dairy products range from: Milk, Yogurt and Cheese"
-},
 
-{
-    id: 2,
-    title: "VEGETABLES",
-    body: "With the vibrant colours vegetables can be red like tomatoes, orange like carrots, yellow as a banana,
-    green as lettace, blue as blueberries and purple like beetroot!"
-},
-
-{
-    id: 3,
-    title: "FATS(Sugars)",
-    body: "This category of food is the most popular! Sweets, chocolates for people with a sweet tooth! "
-}
-]
-
-#Index
 get '/new' do
+  @food = {
+    id: "",
+    title: "",
+    body: ""
+  }
   erb :"food/food_form"
 end
-
+#Index
   get '/' do
     @title = "Food Page" #Instance variable
-    @food = $food
+    @food = Food.all
     erb :"food/index"
   end
-
+#SHOW
   get '/:id' do
     @title = "Food Category"
     id = params[:id]
@@ -54,31 +59,41 @@ end
     erb :"food/show" #Embedded Ruby
   end
 
-  post "/create" do
-    "This is the create root"
-  end
+  #CREATE
+    post "/" do
+      food = Post.new
 
+      food.title = params[:title]
+      food.body = params[:body]
 
-  # get "/:id" do
-  #   id = params[:id]
-  #   "This is show route for #{id}"
-  # end
+      food.save
+
+      redirect "/"
+    end
+
 
   get "/:id/edit" do
-    id = params[:id]
-   @food = $food[id.to_i]
+    id = params[:id].to_i
+   @food = Post.find(id)
     erb :"food/edit_form"
 
   end
 
   put "/:id" do
     id = params[:id]
-    "This is update route for #{id}"
+    food = Post.find(id)
+    food.title = params[:title]
+    food.body = params[:body]
+
+    food.save
+
+    redirect "/"
   end
 
   delete "/:id" do
-    id = params[:id]
-    "This is delete route for #{id}"
+    id = params[:id].to_i
+    Post.destroy(id)
+    redirect "/"
   end
 
 end

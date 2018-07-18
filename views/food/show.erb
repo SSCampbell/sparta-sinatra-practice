@@ -1,2 +1,10 @@
-<h1><%= @food[:title] %></h1>
-<h2><%= @food[:body] %></h2>
+<h1><%= @food.title %></h1>
+<h2><%= @food.title %></h2>
+
+<form class="" action="/<%= @food.id %>" method="POST">
+<div class="">
+<input type="submit" name="" value="Delete Food">
+</div>
+
+<input type="hidden" name="_method" value="DELETE">
+</form>
