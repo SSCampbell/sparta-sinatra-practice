@@ -6,7 +6,7 @@ class FoodController < Sinatra::Base # inherit from a class called bass
   set :views, Proc.new { File.join(root, "views") }
 
 configure :development do
-  register Sinatra::Reloader
+  register Sinatra::Reloader ##Allows reload to occur while in developement environement
 end
 
 $food = [
@@ -42,7 +42,7 @@ get '/new' do
 end
 
   get '/' do
-    @title = "Food Page"
+    @title = "Food Page" #Instance variable
     @food = $food
     erb :"food/index"
   end
@@ -51,7 +51,7 @@ end
     @title = "Food Category"
     id = params[:id]
    @food = $food[id.to_i]
-    erb :"food/show"
+    erb :"food/show" #Embedded Ruby
   end
 
   post "/create" do
