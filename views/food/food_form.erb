@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title><%= @title %></title>
     <style>
+    body{
+      background-color: lightgrey;
+    }
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -31,13 +34,13 @@ input[type=submit]:hover {
 
 div {
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color: lightgrey;
     padding: 20px;
 }
 </style>
   </head>
   <body>
-    <h2><%= @food[:title]%> Form: </h2>
+    <h2>Food Form: </h2>
     <form class="" action="index.html" method="post">
       <label for="foodname">Food Category</label>
    <input type="text" id="foodname" name="foodname" placeholder="Enter a Food Category..">
@@ -47,6 +50,8 @@ div {
 
 
    <input type="submit" value="Submit">
+
+   <button type="button" name="button">Delete</button>
     </form>
   </body>
 </html>

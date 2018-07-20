@@ -2,7 +2,7 @@ class Food
   attr_accessor :id, :title, :body
 
   def self.open_connection
-    conn = PG.connect(dbname: "food", user: "postgres", password: "Shaq123#")
+    conn = PG.connect(dbname: "food_catalog", user: "postgres", password: "Shaq123#")
   end
 
   def self.all
@@ -36,12 +36,12 @@ def self.find id
 
   foods = conn.exec(sql)
 
-return self.hydrate posts[0]
+return self.hydrate foods[0]
 
 end
 
 def save
-conn = Post.open_connection
+conn = Food.open_connection
 
   if !self.id
   sql = "INSERT INTO food (title, body) VALUES ('#{self.title}', '#{self.body}')"

@@ -2,8 +2,15 @@
 <html>
   <head>
     <title><%= @title %></title>
+    <link rel="stylesheet" href="css/stylesheet.css">
   </head>
   <body>
+
+    <style media="screen">
+      body {
+        background-color: black;
+      }
+    </style>
 <%= erb(:"partials/navigation", :layout => false) %>
 
 <%= yield %>

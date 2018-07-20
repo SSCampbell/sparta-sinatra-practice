@@ -1,9 +1,18 @@
-<h1>Welcome to the homepage</h1>
+<h1 style="background-color: black; color: white;">Welcome to the homepage</h1>
 <% @food.each do |food| %>
+<div class="left-side">
 
-<div class="">
-<h1><%= food.title %></h1>
+</div>
+<div class=""  style="background-color: lightgrey;">
+<div class="colomn-md-6">
+<div class="row">
+
+<a style="text-decoration: none;" href="/<%=food.id%>/edit"><h1><%= food.title %></h1></a>
 <p><%= food.body %></p>
 </div>
+</div>
+</div>
+<div class="right-side">
 
+</div>
 <% end %>

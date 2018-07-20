@@ -61,7 +61,7 @@ end
 
   #CREATE
     post "/" do
-      food = Post.new
+      food = Food.new
 
       food.title = params[:title]
       food.body = params[:body]
@@ -74,14 +74,14 @@ end
 
   get "/:id/edit" do
     id = params[:id].to_i
-   @food = Post.find(id)
+   @food = Food.find(id)
     erb :"food/edit_form"
 
   end
 
   put "/:id" do
     id = params[:id]
-    food = Post.find(id)
+    food = Food.find(id)
     food.title = params[:title]
     food.body = params[:body]
 
@@ -92,7 +92,7 @@ end
 
   delete "/:id" do
     id = params[:id].to_i
-    Post.destroy(id)
+    Food.destroy(id)
     redirect "/"
   end
 
