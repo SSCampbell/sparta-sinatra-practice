@@ -9,6 +9,9 @@ configure :development do
   register Sinatra::Reloader ##Allows reload to occur while in developement environement
 end
 
+helpers Sinatra::Cookies
+
+enable :sessions
 # $food = [
 # {
 # 	 id: 0,
@@ -36,34 +39,50 @@ end
 # }
 # ]
 
-
-get '/new' do
-  @food = {
-    id: "",
-    title: "",
-    body: ""
-  }
-  erb :"food/food_form"
-end
 #Index
   get '/' do
+
+    unless cookies[:visited]
+      response.set_cookie(:visited, :value => 1, :expired => Time.now + (60 * 60 * 2))
+
+    end
     @title = "Food Page" #Instance variable
-    @food = Food.all
+    @foods = Food.all
     erb :"food/index"
   end
+
+get '/new' do
+  food = Food.new
+  @food = food
+    food.id = ""
+
+  erb :"food/food_form"
+end
+
 #SHOW
   get '/:id' do
     @title = "Food Category"
-    id = params[:id]
-   @food = $food[id.to_i]
+    id = params[:id].to_i
+
+
+   # if (!sessions[:foods])
+   #   sessions[:foods] = []
+   # end
+   # if (!sessions[:foods].include?(id))
+   #   sessions[:foods].push(id)
+   # end
+   # puts "The user has visited #{sessions[:foods]}"
+
+   @food = Food.find(id)
     erb :"food/show" #Embedded Ruby
   end
+
+
 
   #CREATE
     post "/" do
       food = Food.new
-
-      food.title = params[:title]
+      food.title = params[:foodname]
       food.body = params[:body]
 
       food.save
@@ -71,25 +90,25 @@ end
       redirect "/"
     end
 
-
+#EDIT
   get "/:id/edit" do
     id = params[:id].to_i
    @food = Food.find(id)
     erb :"food/edit_form"
 
   end
-
-  put "/:id" do
-    id = params[:id]
+#UPDATE
+    put "/:id" do
+    id = params[:id].to_i
     food = Food.find(id)
-    food.title = params[:title]
+    food.title = params[:foodname]
     food.body = params[:body]
 
     food.save
 
     redirect "/"
   end
-
+#DELETE
   delete "/:id" do
     id = params[:id].to_i
     Food.destroy(id)

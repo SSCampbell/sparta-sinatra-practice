@@ -3,14 +3,16 @@
   <head>
     <title><%= @title %></title>
     <link rel="stylesheet" href="css/stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   </head>
   <body>
 
-    <style media="screen">
-      body {
-        background-color: black;
-      }
-    </style>
 <%= erb(:"partials/navigation", :layout => false) %>
 
 <%= yield %>

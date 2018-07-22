@@ -1,13 +1,13 @@
-<h1 style="background-color: black; color: white;">Welcome to the homepage</h1>
-<% @food.each do |food| %>
+<h1>Welcome to the homepage</h1>
+<% @foods.each do |food| %>
 <div class="left-side">
 
 </div>
-<div class=""  style="background-color: lightgrey;">
+<div class=""  style="border-radius: 5px; border: 2px solid green;">
 <div class="colomn-md-6">
 <div class="row">
 
-<a style="text-decoration: none;" href="/<%=food.id%>/edit"><h1><%= food.title %></h1></a>
+<a style="text-decoration: none;" href="/<%=food.id%>/edit"><h2><%= food.title %></h2></a>
 <p><%= food.body %></p>
 </div>
 </div>
